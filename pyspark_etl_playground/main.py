@@ -20,6 +20,13 @@ def main():
         (F.col("audience_rating") > 90) & (F.col("tomatometer_rating") > 90)
     ).show()
 
+    avg_reviews = (
+        movie_reviews.select("movie_title", "genre", "audience_rating")
+        .groupBy("genre")
+        .agg(F.avg("audience_rating"))
+    )
+    avg_reviews.show()
+
 
 if __name__ == "__main__":
     main()
